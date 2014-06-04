@@ -5,7 +5,7 @@
   "author": "David Feinberg",
   "main": "lib/connect-sqlite3",
   "dependencies": {
-    "sqlite3": "git+https://github.com/developmentseed/node-sqlite3.git"
+    "sqlite3": "git+https://github.com/mapbox/node-sqlite3.git"
   },
   "devDependencies": {
     "connect": ">=1.0.0"
