@@ -1,7 +1,7 @@
 {
   "name": "connect-sqlite3",
   "description": "SQLite3 session store for Connect",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "author": "David Feinberg",
   "main": "lib/connect-sqlite3",
   "dependencies": {
@@ -16,10 +16,10 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/rawberg/connect-sqlite3.git"
-  },  
+  },
   "licenses": [
     {
       "type": "MIT"
     }
-  ]  
+  ]
 }
