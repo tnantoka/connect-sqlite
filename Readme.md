@@ -47,3 +47,6 @@ connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis 
       app.use(express.static(__dirname + '/public'));
     });
 
+## Test
+
+    npm test
