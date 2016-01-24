@@ -1,8 +1,7 @@
 var should = require('should'),
-    connect = require('connect'),
+    session = require('express-session'),
     util = require('util'),
-    SQLiteStore = require('../lib/connect-sqlite3.js')(connect);
-
+    SQLiteStore = require('../lib/connect-sqlite3.js')(session);
   
 describe('connect-sqlite3 basic test suite', function() {
     before(function() {
@@ -85,3 +84,41 @@ describe('connect-sqlite3 basic test suite', function() {
 
 
 });
+
+
+describe('connect-sqlite3 shared cache', function() {
+  it("should retrieve in one cached session what's stored in another.", function(done) {
+    var cwd = process.cwd();
+    var memStore = new SQLiteStore({db: 'file::memory:?cache=shared', mode: 0x20046});
+    process.chdir('..'); // Ensure we aren't opening a shared disk file
+    var memStore2 = new SQLiteStore({db: 'file::memory:?cache=shared', mode: 0x20046});
+
+    memStore.set('1111222233334444', {cookie: {maxAge:2011}, name: 'sample name'}, function(err, rows) {
+      process.chdir(cwd); // Restore dir
+      should.not.exist(err, 'set() returned an error');
+      rows.should.be.empty;
+      memStore2.get('1111222233334444', function(err, session) {
+        should.not.exist(err, 'get() returned an error');
+        should.exist(session);
+        (session).should.eql({cookie: {maxAge:2011}, name: 'sample name'});
+        done();
+      });
+    });
+  });
+
+  it("should not retrieve in one uncached session what's stored in another.", function(done) {
+    var memStore = new SQLiteStore({db: ':memory:'});
+    var memStore2 = new SQLiteStore({db: ':memory:'});
+
+    memStore.set('1111222233334444', {cookie: {maxAge:2011}, name: 'sample name'}, function(err, rows) {
+      should.not.exist(err, 'set() returned an error');
+      rows.should.be.empty;
+      memStore2.get('1111222233334444', function(err, session) {
+        should.not.exist(err, 'get() returned an error');
+        should.not.exist(session);
+        done();
+      });
+    });
+  });
+});
+  
