@@ -4,17 +4,18 @@ connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis 
 
 
 ## Installation
-
+```sh
 	  $ npm install connect-sqlite3
+```
 
 ## Options
 
   - `table='sessions'` Database table name
   - `db='sessionsDB'` Database file name (defaults to table name)
-  - `dir='.'` Direcotry to save '<db>.db' file
+  - `dir='.'` Directory to save '<db>.db' file
 
 ## Usage
-
+```js
     var connect = require('connect'),
         SQLiteStore = require('connect-sqlite3')(connect);
 
@@ -22,9 +23,9 @@ connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis 
       connect.cookieParser(),
       connect.session({ store: new SQLiteStore, secret: 'your secret' })
     );
-
+```
   with express
-
+```js
     3.x:
     var SQLiteStore = require('connect-sqlite3')(express);
 
@@ -46,7 +47,8 @@ connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis 
       app.use(app.router);
       app.use(express.static(__dirname + '/public'));
     });
-
+```
 ## Test
-
-    npm test
+```sh
+    $ npm test
+```
