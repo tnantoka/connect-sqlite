@@ -1,14 +1,14 @@
 {
   "name": "connect-sqlite3",
   "description": "SQLite3 session store for Connect",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "author": "David Feinberg",
   "main": "lib/connect-sqlite3",
   "scripts": {
     "test": "mocha test/test.js"
   },
   "dependencies": {
-    "sqlite3": "^3.1.1"
+    "sqlite3": "^4.0.0"
   },
   "devDependencies": {
     "connect": ">=1.0.0",
