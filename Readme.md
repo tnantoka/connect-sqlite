@@ -40,7 +40,7 @@ connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis 
       app.use(express.bodyParser());
       app.use(express.methodOverride());
       app.use(express.cookieParser());
-      app.use(express.session({
+      app.use(session({
         store: new SQLiteStore,
         secret: 'your secret',
         cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 1 week
