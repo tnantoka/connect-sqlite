@@ -1,32 +1,38 @@
+# Connect SQLite3
 
-# Connect SQLite
+connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis store.
 
-connect-sqlite is a SQLite session store, just copied connect-redis.
-
- connect-sqlite support only connect `>= 1.4.0`.
 
 ## Installation
-
-	  $ npm install connect-sqlite
+```sh
+	  $ npm install connect-sqlite3
+```
 
 ## Options
 
-  - `db='sessions'` Database file & table name
-  - `dir='.'` Direcotry to save '<db>.db' file
+  - `table='sessions'` Database table name
+  - `db='sessionsDB'` Database file name (defaults to table name)
+  - `dir='.'` Directory to save '<db>.db' file
+  - `concurrentDB='false'` Enables [WAL](https://www.sqlite.org/wal.html) mode (defaults to false)
 
 ## Usage
-
-    var connect = require('connect')
-	 	  , SQLiteStore = require('connect-sqlite')(connect);
+```js
+    var connect = require('connect'),
+        SQLiteStore = require('connect-sqlite3')(connect);
 
     connect.createServer(
       connect.cookieParser(),
       connect.session({ store: new SQLiteStore, secret: 'your secret' })
     );
+```
+  with express
+```js
+    3.x:
+    var SQLiteStore = require('connect-sqlite3')(express);
 
-  with express    
-
-    var SQLiteStore = require('connect-sqlite')(express);
+    4.x:
+    var session = require('express-session');
+    var SQLiteStore = require('connect-sqlite3')(session);
 
     app.configure(function() {
       app.set('views', __dirname + '/views');
@@ -34,7 +40,7 @@ connect-sqlite is a SQLite session store, just copied connect-redis.
       app.use(express.bodyParser());
       app.use(express.methodOverride());
       app.use(express.cookieParser());
-      app.use(express.session({
+      app.use(session({
         store: new SQLiteStore,
         secret: 'your secret',
         cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 1 week
@@ -42,4 +48,8 @@ connect-sqlite is a SQLite session store, just copied connect-redis.
       app.use(app.router);
       app.use(express.static(__dirname + '/public'));
     });
-
+```
+## Test
+```sh
+    $ npm test
+```
