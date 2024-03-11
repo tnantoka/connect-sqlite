@@ -13,6 +13,7 @@ connect-sqlite3 is a SQLite3 session store modeled after the TJ's connect-redis 
   - `table='sessions'` Database table name
   - `db='sessionsDB'` Database file name (defaults to table name)
   - `dir='.'` Directory to save '<db>.db' file
+  - `createDirIfNotExists='false'` Directory 'dir' is created recursively if not exists 
   - `concurrentDB='false'` Enables [WAL](https://www.sqlite.org/wal.html) mode (defaults to false)
 
 ## Usage
